@@ -10,7 +10,6 @@
 
 		//one way data binding
 		for (var key in model) {
-			console.log(1);
 			if (model.hasOwnProperty(key)) {
 				var obj = {};
 				Object.defineProperty(obj, key, {
@@ -28,10 +27,21 @@
 
 		//two way data binding
 		console.log(el.childNodes);
-		for (var i = 0; i < el.childNodes.length; i++) {
-			if (el.childNodes[i].hasAttribute('m-model')) {
-				var modelval = el.childNodes[i].value;
-				update(start, end);
+		console.log(el.children);
+		// for (var i = 0; i < el.childNodes.length; i++) {
+		// 	if (el.childNodes[i].hasAttribute('m-model')) {
+		// 		var modelval = el.childNodes[i].value;
+		// 		update(start, end);
+		// 	}
+		// }
+
+		for (var i = 0; i < el.children.length; i++) {
+			var child=el.children[i];
+			if(child.hasAttribute('m-model')){
+				var modelVal = child.value;
+				var modelName=child.getAttribute('m-model');
+
+				update(start,end,modelVal,modelName,el);
 			}
 		}
 
@@ -49,7 +59,8 @@
 		el: "div",
 		model: {
 			'a': 1,
-			'b': 3
+			'b': 3,
+			'c':333
 		}
 
 	}
